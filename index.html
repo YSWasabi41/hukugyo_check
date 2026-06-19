@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>副業完全防衛マップ プレミアム付録スライドデッキ</title>
+    <!-- Google Fontsのロード -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru:wght@400;500&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome & Tailwind CSSの読み込み -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            bg: '#f1ebd9',
+                            slide: '#faf6ee',
+                            terracotta: '#dca385',
+                            accent: '#b05c47',
+                            sand: '#ebdccb',
+                            text: '#4a3f3b',
+                            muted: '#8c7e72',
+                            dark: '#5c4a45'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: #f1ebd9;
+            color: #4a3f3b;
+            overflow-x: hidden;
+        }
+        
+        .kiwi-maru {
+            font-family: 'Kiwi Maru', serif;
+        }
+
+        /* 1280x720の厳格なスライドキャンバスを比率維持したまま縮小表示するコンテナ */
+        .slide-viewport {
+            width: 1280px;
+            height: 720px;
+            transform-origin: center center;
+            transition: transform 0.2s ease-out;
+        }
+
+        /* スクロールバーの細さ調整 */
+        .scroll-custom::-webkit-scrollbar {
+            width: 5px;
+        }
+        .scroll-custom::-webkit-scrollbar-thumb {
+            background-color: #ebdccb;
+            border-radius: 10px;
+        }
+
+        /* アニメーション用 */
+        @keyframes bounce-slow {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-6px); }
+        }
+        .animate-bounce-slow {
+            animation: bounce-slow 1.2s infinite ease-in-out;
+        }
+    </style>
+</head>
+<body class="min-height-screen flex flex-col justify-between items-center p-4 md:p-6 select-none">
+
+    <!-- ナビゲーションメニュー（スライドの上部設置） -->
+    <header class="w-full max-w-[1280px] bg-brand-slide rounded-2xl shadow-md p-4 mb-4 flex flex-col md:flex-row justify-between items-center gap-4 z-10">
+        <div class="flex items-center gap-3">
+            <div class="bg-brand-accent text-white p-2.5 rounded-xl">
+                <i class="fa-solid fa-shield-halved text-xl"></i>
+            </div>
+            <div>
+                <h1 class="font-bold text-lg text-brand-dark kiwi-maru">副業完全防衛マップ：プレミアム付録</h1>
+                <p class="text-xs text-brand-muted">家事・パートに追われる主婦のための、バレない・損しないお守りツール</p>
+            </div>
+        </div>
+        
+        <!-- タブコントロール -->
+        <div class="flex bg-brand-sand/50 p-1 rounded-xl gap-1">
+            <button onclick="switchSlide(1)" id="tab-1" class="px-4 py-2 text-xs md:text-sm font-bold rounded-lg transition-all flex items-center gap-2 text-brand-accent bg-brand-slide shadow-sm">
+                <i class="fa-solid fa-list-check"></i> 1. 実行チェックシート
+            </button>
+            <button onclick="switchSlide(2)" id="tab-2" class="px-4 py-2 text-xs md:text-sm font-bold rounded-lg transition-all flex items-center gap-2 text-brand-muted hover:text-brand-dark">
+                <i class="fa-solid fa-calculator"></i> 2. 副業安全上限早見表
+            </button>
+            <button onclick="switchSlide(3)" id="tab-3" class="px-4 py-2 text-xs md:text-sm font-bold rounded-lg transition-all flex items-center gap-2 text-brand-muted hover:text-brand-dark">
+                <i class="fa-solid fa-diagram-project"></i> 3. 確定申告フローチャート
+            </button>
+        </div>
+    </header>
+
+    <!-- メインスライド表示領域（アスペクト比コンテナ） -->
+    <main class="w-full flex-grow flex justify-center items-center overflow-hidden mb-4 min-h-[400px] md:min-h-[600px] relative">
+        <div class="slide-wrapper flex justify-center items-center w-full h-full">
+            <div class="slide-viewport relative bg-brand-slide rounded-3xl shadow-2xl p-9 flex flex-col justify-between overflow-hidden" id="slide-container">
+                
+                <!-- 背景の美しい装飾グラデーション（全スライド共通） -->
+                <div class="absolute -top-[150px] -right-[150px] w-[450px] h-[450px] rounded-full bg-radial-gradient pointer-events-none z-0 opacity-40" style="background: radial-gradient(circle, rgba(238,223,204,0.6) 0%, rgba(250,246,238,0) 70%);"></div>
+                <div class="absolute -bottom-[150px] -left-[150px] w-[350px] h-[350px] rounded-full bg-radial-gradient pointer-events-none z-0 opacity-40" style="background: radial-gradient(circle, rgba(214,200,181,0.5) 0%, rgba(250,246,238,0) 70%);"></div>
+
+                <!-- ==================== スライド1：5ステップ実行チェックシート ==================== -->
+                <div id="slide-content-1" class="h-full flex flex-col justify-between relative z-10 transition-opacity duration-300">
+                    <!-- ヘッダー -->
+                    <div class="flex justify-between items-end border-b-2 border-brand-sand pb-3 mb-4">
+                        <div class="flex flex-col gap-1">
+                            <span class="bg-brand-terracotta text-white text-xs font-bold px-3 py-0.5 rounded-full w-fit tracking-wider">有料記事購入者限定特典</span>
+                            <h2 class="kiwi-maru text-3xl font-medium text-brand-dark">5ステップ実行チェックシート</h2>
+                            <p class="text-xs text-brand-muted">〜「やること」と「完了の定義」を明確にし、迷わず進める完全ロードマップ〜</p>
+                        </div>
+                        <div class="text-right text-xs text-brand-muted leading-relaxed">
+                            今夜の目標：<strong class="text-brand-accent font-bold">30分</strong> (①〜③)<br>
+                            今週の目標：<strong class="text-brand-accent font-bold">20分</strong> (④〜⑤)
+                        </div>
+                    </div>
+
+                    <!-- 進捗ステータスバー -->
+                    <div class="bg-brand-sand/30 rounded-xl p-3 mb-3 flex items-center justify-between gap-4">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-star-half-stroke text-brand-terracotta"></i>
+                            <span class="text-xs font-bold text-brand-dark">ステップ達成度:</span>
+                        </div>
+                        <div class="flex-grow bg-white/70 h-3 rounded-full overflow-hidden border border-brand-sand relative">
+                            <div id="check-progress-bar" class="bg-brand-accent h-full w-[0%] transition-all duration-300"></div>
+                        </div>
+                        <span id="check-progress-text" class="text-xs font-bold text-brand-accent">0 / 5 完了 (0%)</span>
+                    </div>
+
+                    <!-- メインコンテンツテーブル -->
+                    <div class="flex-grow overflow-hidden">
+                        <table class="w-full border-separate border-spacing-y-2">
+                            <thead>
+                                <tr class="text-left text-xs font-bold text-brand-muted">
+                                    <th class="pl-10">⬜ やること</th>
+                                    <th class="text-center w-[100px]">⏳ 時間</th>
+                                    <th class="w-[280px]">🎯 完了の定義（これでOK！）</th>
+                                    <th class="w-[300px]">💡 なぜこの順番なの？</th>
+                                    <th class="w-[280px]">⚠️ やらない場合のリスク</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- STEP 1 -->
+                                <tr class="bg-white rounded-2xl shadow-sm transition-transform duration-200 hover:scale-[1.005] group cursor-pointer" onclick="toggleStepCheck(1)">
+                                    <td class="p-3 pl-4 rounded-l-2xl border-l-4 border-brand-sand flex items-start gap-3">
+                                        <div class="pt-0.5" id="checkbox-1">
+                                            <i class="fa-regular fa-square text-lg text-brand-muted group-hover:text-brand-accent"></i>
+                                        </div>
+                                        <div>
+                                            <span class="bg-brand-sand text-brand-dark text-[10px] px-1.5 py-0.5 rounded font-bold">① 今夜</span><br>
+                                            <span class="font-bold text-brand-dark text-sm">副業専用ネットバンク口座の開設申込み</span>
+                                        </div>
+                                    </td>
+                                    <td class="text-center p-3 w-[100px]"><span class="bg-brand-sand text-brand-dark text-xs font-bold px-2 py-1 rounded-lg">最短 5分</span></td>
+                                    <td class="p-3 text-xs bg-brand-slide/50 text-brand-dark leading-relaxed">アプリにログインできて<br><span class="text-brand-accent font-bold">口座番号が表示されている状態</span></td>
+                                    <td class="p-3 text-xs text-brand-muted leading-relaxed"><i class="fa-solid fa-lock text-brand-terracotta mr-1"></i>お金の「逃げ道」を最初に作ることで、副業への迷いが消え、安心感が手に入る。</td>
+                                    <td class="p-3 text-xs text-brand-accent leading-relaxed rounded-r-2xl"><i class="fa-solid fa-triangle-exclamation mr-1"></i>生活費口座に副業名（note等）が記帳され、夫に見られた際一発バレ。</td>
+                                </tr>
+
+                                <!-- STEP 2 -->
+                                <tr class="bg-white rounded-2xl shadow-sm transition-transform duration-200 hover:scale-[1.005] group cursor-pointer" onclick="toggleStepCheck(2)">
+                                    <td class="p-3 pl-4 rounded-l-2xl border-l-4 border-brand-sand flex items-start gap-3">
+                                        <div class="pt-0.5" id="checkbox-2">
+                                            <i class="fa-regular fa-square text-lg text-brand-muted group-hover:text-brand-accent"></i>
+                                        </div>
+                                        <div>
+                                            <span class="bg-brand-sand text-brand-dark text-[10px] px-1.5 py-0.5 rounded font-bold">② 今夜</span><br>
+                                            <span class="font-bold text-brand-dark text-sm">Threadsアカウントの初期設定（匿名）</span>
+                                        </div>
+                                    </td>
+                                    <td class="text-center p-3 w-[100px]"><span class="bg-brand-sand text-brand-dark text-xs font-bold px-2 py-1 rounded-lg">15分</span></td>
+                                    <td class="p-3 text-xs bg-brand-slide/50 text-brand-dark leading-relaxed">ニックネーム・自己紹介・プロフ写真の<br><span class="text-brand-accent font-bold">3点が設定されている状態</span></td>
+                                    <td class="p-3 text-xs text-brand-muted leading-relaxed"><i class="fa-solid fa-seedling text-brand-terracotta mr-1"></i>発信する「器」を先に用意しておくことで、日常でネタを思いついた時にすぐ動ける。</td>
+                                    <td class="p-3 text-xs text-brand-accent leading-relaxed rounded-r-2xl"><i class="fa-solid fa-triangle-exclamation mr-1"></i>空のアカウントは誰もフォローしないため、スタート直後の初速がゼロになる。</td>
+                                </tr>
+
+                                <!-- STEP 3 -->
+                                <tr class="bg-white rounded-2xl shadow-sm transition-transform duration-200 hover:scale-[1.005] group cursor-pointer" onclick="toggleStepCheck(3)">
+                                    <td class="p-3 pl-4 rounded-l-2xl border-l-4 border-brand-sand flex items-start gap-3">
+                                        <div class="pt-0.5" id="checkbox-3">
+                                            <i class="fa-regular fa-square text-lg text-brand-muted group-hover:text-brand-accent"></i>
+                                        </div>
+                                        <div>
+                                            <span class="bg-brand-sand text-brand-dark text-[10px] px-1.5 py-0.5 rounded font-bold">③ 今夜</span><br>
+                                            <span class="font-bold text-brand-dark text-sm">日常ネタをスマホのメモ帳に3行書く</span>
+                                        </div>
+                                    </td>
+                                    <td class="text-center p-3 w-[100px]"><span class="bg-brand-sand text-brand-dark text-xs font-bold px-2 py-1 rounded-lg">10分</span></td>
+                                    <td class="p-3 text-xs bg-brand-slide/50 text-brand-dark leading-relaxed">「困ったこと」「解決した工夫」「手順」の<br><span class="text-brand-accent font-bold">3行がテキストで埋まっている状態</span></td>
+                                    <td class="p-3 text-xs text-brand-muted leading-relaxed"><i class="fa-solid fa-pen-fancy text-brand-terracotta mr-1"></i>器ができた直後の高い熱量のまま、最初のネタ（タネ）を確実に収穫する。</td>
+                                    <td class="p-3 text-xs text-brand-accent leading-relaxed rounded-r-2xl"><i class="fa-solid fa-triangle-exclamation mr-1"></i>「何を書こう」と頭で考え続け、難しく感じてしまい手が止まってしまう。</td>
+                                </tr>
+
+                                <!-- STEP 4 -->
+                                <tr class="bg-white rounded-2xl shadow-sm transition-transform duration-200 hover:scale-[1.005] group cursor-pointer" onclick="toggleStepCheck(4)">
+                                    <td class="p-3 pl-4 rounded-l-2xl border-l-4 border-brand-sand flex items-start gap-3">
+                                        <div class="pt-0.5" id="checkbox-4">
+                                            <i class="fa-regular fa-square text-lg text-brand-muted group-hover:text-brand-accent"></i>
+                                        </div>
+                                        <div>
+                                            <span class="bg-brand-sand text-brand-dark text-[10px] px-1.5 py-0.5 rounded font-bold">④ 今週</span><br>
+                                            <span class="font-bold text-brand-dark text-sm">ChatGPTプロンプトで初記事生成・下書き</span>
+                                        </div>
+                                    </td>
+                                    <td class="text-center p-3 w-[100px]"><span class="bg-brand-sand text-brand-dark text-xs font-bold px-2 py-1 rounded-lg">15分</span></td>
+                                    <td class="p-3 text-xs bg-brand-slide/50 text-brand-dark leading-relaxed">noteの下書き編集欄に文章が貼り付けられ、<br><span class="text-brand-accent font-bold">「下書き保存」が完了した状態</span></td>
+                                    <td class="p-3 text-xs text-brand-muted leading-relaxed"><i class="fa-solid fa-wand-magic-sparkles text-brand-terracotta mr-1"></i>「私にも記事が作れた！」という成功体験をまずはノーリスクで実感するため。</td>
+                                    <td class="p-3 text-xs text-brand-accent leading-relaxed rounded-r-2xl"><i class="fa-solid fa-triangle-exclamation mr-1"></i>最初から完璧を目指し、文章を自力で書き直そうとして永遠に公開できない。</td>
+                                </tr>
+
+                                <!-- STEP 5 -->
+                                <tr class="bg-white rounded-2xl shadow-sm transition-transform duration-200 hover:scale-[1.005] group cursor-pointer" onclick="toggleStepCheck(5)">
+                                    <td class="p-3 pl-4 rounded-l-2xl border-l-4 border-brand-sand flex items-start gap-3">
+                                        <div class="pt-0.5" id="checkbox-5">
+                                            <i class="fa-regular fa-square text-lg text-brand-muted group-hover:text-brand-accent"></i>
+                                        </div>
+                                        <div>
+                                            <span class="bg-brand-sand text-brand-dark text-[10px] px-1.5 py-0.5 rounded font-bold">⑤ 今週</span><br>
+                                            <span class="font-bold text-brand-dark text-sm">Threadsに「お誘い報告」で初投稿</span>
+                                        </div>
+                                    </td>
+                                    <td class="text-center p-3 w-[100px]"><span class="bg-brand-sand text-brand-dark text-xs font-bold px-2 py-1 rounded-lg">5分</span></td>
+                                    <td class="p-3 text-xs bg-brand-slide/50 text-brand-dark leading-relaxed">noteリンクを貼ったお誘い文章が、<br><span class="text-brand-accent font-bold">タイムラインに公開表示された状態</span></td>
+                                    <td class="p-3 text-xs text-brand-muted leading-relaxed"><i class="fa-solid fa-paper-plane text-brand-terracotta mr-1"></i>最後は売り込み（宣伝）ではなく、ただの「活動報告」として届けるから。</td>
+                                    <td class="p-3 text-xs text-brand-accent leading-relaxed rounded-r-2xl"><i class="fa-solid fa-triangle-exclamation mr-1"></i>砂漠に店を建てるのと同じで、記事が誰にも届かずにひっそりと終わる。</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- フッター -->
+                    <div class="flex justify-between items-center border-t border-brand-sand pt-3 mt-4 text-xs text-brand-muted">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-star text-brand-terracotta"></i>
+                            <span>まずは今夜、ベッドの中でステップ③（日常メモ）までを終わらせましょう！</span>
+                        </div>
+                        <div class="kiwi-maru font-medium text-brand-dark text-xs">有料記事「完全防衛マップ」購入者限定付録</div>
+                    </div>
+                </div>
+
+                <!-- ==================== スライド2：パート月収別「副業安全上限」早見表 ==================== -->
+                <div id="slide-content-2" class="h-full flex flex-col justify-between relative z-10 transition-opacity duration-300 hidden">
+                    <!-- ヘッダー -->
+                    <div class="flex justify-between items-end border-b-2 border-brand-sand pb-3 mb-4">
+                        <div class="flex flex-col gap-1">
+                            <span class="bg-brand-terracotta text-white text-xs font-bold px-3 py-0.5 rounded-full w-fit tracking-wider">有料記事購入者限定特典</span>
+                            <h2 class="kiwi-maru text-3xl font-medium text-brand-dark">パート月収別「副業安全上限」早見表</h2>
+                            <p class="text-xs text-brand-muted">〜社会保険と税金の「壁」を完全に回避して、一円も損しない安全な収入バランス〜</p>
+                        </div>
+                        <div class="text-right text-xs text-brand-muted leading-relaxed">
+                            社会保険扶養（年130万円以内）基準<br>
+                            ※パート先での社会保険加入条件により異なる場合があります。
+                        </div>
+                    </div>
+
+                    <!-- メインコンテンツ -->
+                    <div class="flex-grow flex gap-6 overflow-hidden">
+                        
+                        <!-- 左：早見表テーブル -->
+                        <div class="flex-[1.3] flex flex-col justify-center">
+                            <table class="w-full text-left border-separate border-spacing-y-2">
+                                <thead>
+                                    <tr class="text-xs font-bold text-brand-muted">
+                                        <th class="pl-4">👤 パート月収</th>
+                                        <th>💰 副業月上限 (目安)</th>
+                                        <th>📈 副業年上限</th>
+                                        <th>📝 確定申告が必要になる月</th>
+                                        <th>🛡️ 月3万円稼ぐ時の扶養影響</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="bg-white rounded-2xl shadow-sm">
+                                        <td class="p-3 pl-4 rounded-l-2xl border-l-4 border-brand-accent font-bold text-brand-dark text-sm">月 5万円</td>
+                                        <td class="p-3 font-bold text-brand-accent text-sm">約 5.8 万円</td>
+                                        <td class="p-3 text-sm text-brand-dark">約 69.6 万円</td>
+                                        <td class="p-3 text-xs text-brand-muted">
+                                            <span class="text-amber-600 font-bold"><i class="fa-solid fa-triangle-exclamation"></i> 翌年要申告</span><br>
+                                            (年20万円超過時)
+                                        </td>
+                                        <td class="p-3 rounded-r-2xl text-xs">
+                                            <span class="bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded">✅ 安全圏</span><br>
+                                            <span class="text-[11px] text-brand-muted">扶養を傷つける心配なし</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="bg-white rounded-2xl shadow-sm">
+                                        <td class="p-3 pl-4 rounded-l-2xl border-l-4 border-brand-sand font-bold text-brand-dark text-sm">月 7万円</td>
+                                        <td class="p-3 font-bold text-brand-accent text-sm">約 3.8 万円</td>
+                                        <td class="p-3 text-sm text-brand-dark">約 45.6 万円</td>
+                                        <td class="p-3 text-xs text-brand-muted">
+                                            <strong class="text-brand-dark">7ヶ月目頃</strong><br>
+                                            (月3万円で累計20万到達)
+                                        </td>
+                                        <td class="p-3 rounded-r-2xl text-xs">
+                                            <span class="bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded">✅ 安全圏</span><br>
+                                            <span class="text-[11px] text-brand-muted">月3万なら余裕でセーフ</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="bg-white rounded-2xl shadow-sm">
+                                        <td class="p-3 pl-4 rounded-l-2xl border-l-4 border-brand-sand font-bold text-brand-dark text-sm">月 8万円</td>
+                                        <td class="p-3 font-bold text-brand-accent text-sm">約 2.8 万円</td>
+                                        <td class="p-3 text-sm text-brand-dark">約 33.6 万円</td>
+                                        <td class="p-3 text-xs text-brand-muted">
+                                            <strong class="text-brand-dark">7ヶ月目頃</strong><br>
+                                            (月3万円で累計20万到達)
+                                        </td>
+                                        <td class="p-3 rounded-r-2xl text-xs">
+                                            <span class="bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded">✅ 安全圏</span><br>
+                                            <span class="text-[11px] text-brand-accent font-semibold">※副業月2.8万内に抑える</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="bg-white rounded-2xl shadow-sm">
+                                        <td class="p-3 pl-4 rounded-l-2xl border-l-4 border-brand-sand font-bold text-brand-dark text-sm">月 9万円</td>
+                                        <td class="p-3 font-bold text-brand-accent text-sm">約 1.8 万円</td>
+                                        <td class="p-3 text-sm text-brand-dark">約 21.6 万円</td>
+                                        <td class="p-3 text-xs text-brand-muted">
+                                            <strong class="text-brand-dark">7〜8ヶ月目頃</strong><br>
+                                            (月3万円で累計20万到達)
+                                        </td>
+                                        <td class="p-3 rounded-r-2xl text-xs">
+                                            <span class="bg-amber-100 text-amber-800 font-bold px-2 py-0.5 rounded">⚠️ 要注意</span><br>
+                                            <span class="text-[11px] text-amber-700 font-semibold">副業月2万以内に抑える</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="bg-white rounded-2xl shadow-sm">
+                                        <td class="p-3 pl-4 rounded-l-2xl border-l-4 border-brand-sand font-bold text-brand-dark text-sm">月 10万円</td>
+                                        <td class="p-3 font-bold text-brand-accent text-sm">約 0.8 万円</td>
+                                        <td class="p-3 text-sm text-brand-dark">約 9.6 万円</td>
+                                        <td class="p-3 text-xs text-brand-muted">
+                                            <strong class="text-brand-dark">3〜4ヶ月目頃</strong><br>
+                                            (月3万円で累計20万到達)
+                                        </td>
+                                        <td class="p-3 rounded-r-2xl text-xs">
+                                            <span class="bg-rose-100 text-rose-800 font-bold px-2 py-0.5 rounded">⛔ 要確認</span><br>
+                                            <span class="text-[11px] text-rose-600 font-semibold">勤務先の社保規準の確認必須</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- 右：自分で入力して自動計算できる！所得管理メモ -->
+                        <div class="flex-grow bg-brand-sand/30 border border-dashed border-brand-terracotta rounded-2xl p-4 flex flex-col justify-between">
+                            <div>
+                                <h3 class="kiwi-maru text-brand-dark font-medium text-sm flex items-center gap-1.5 mb-0.5">
+                                    <i class="fa-solid fa-pen-fancy text-brand-terracotta"></i>インタラクティブ所得管理メモ
+                                </h3>
+                                <p class="text-[10px] text-brand-muted mb-3">〜手入力するだけで、年20万円の上限ラインまで自動計算！〜</p>
+                                
+                                <!-- 12ヶ月入力用フォーム -->
+                                <div class="grid grid-cols-4 gap-1.5 mb-3">
+                                    <div class="bg-white rounded-lg p-1 border border-brand-sand flex flex-col items-center">
+                                        <span class="text-[9px] font-bold text-brand-muted">1月</span>
+                                        <input type="number" id="m-1" oninput="calculateTotalIncome()" class="w-full text-center text-xs font-bold text-brand-dark border-b border-dotted border-brand-muted bg-transparent outline-none focus:border-brand-accent" placeholder="0">
+                                    </div>
+                                    <div class="bg-white rounded-lg p-1 border border-brand-sand flex flex-col items-center">
+                                        <span class="text-[9px] font-bold text-brand-muted">2月</span>
+                                        <input type="number" id="m-2" oninput="calculateTotalIncome()" class="w-full text-center text-xs font-bold text-brand-dark border-b border-dotted border-brand-muted bg-transparent outline-none focus:border-brand-accent" placeholder="0">
+                                    </div>
+                                    <div class="bg-white rounded-lg p-1 border border-brand-sand flex flex-col items-center">
+                                        <span class="text-[9px] font-bold text-brand-muted">3月</span>
+                                        <input type="number" id="m-3" oninput="calculateTotalIncome()" class="w-full text-center text-xs font-bold text-brand-dark border-b border-dotted border-brand-muted bg-transparent outline-none focus:border-brand-accent" placeholder="0">
+                                    </div>
+                                    <div class="bg-white rounded-lg p-1 border border-brand-sand flex flex-col items-center">
+                                        <span class="text-[9px] font-bold text-brand-muted">4月</span>
+                                        <input type="number" id="m-4" oninput="calculateTotalIncome()" class="w-full text-center text-xs font-bold text-brand-dark border-b border-dotted border-brand-muted bg-transparent outline-none focus:border-brand-accent" placeholder="0">
+                                    </div>
+                                    <div class="bg-white rounded-lg p-1 border border-brand-sand flex flex-col items-center">
+                                        <span class="text-[9px] font-bold text-brand-muted">5月</span>
+                                        <input type="number" id="m-5" oninput="calculateTotalIncome()" class="w-full text-center text-xs font-bold text-brand-dark border-b border-dotted border-brand-muted bg-transparent outline-none focus:border-brand-accent" placeholder="0">
+                                    </div>
+                                    <div class="bg-white rounded-lg p-1 border border-brand-sand flex flex-col items-center">
+                                        <span class="text-[9px] font-bold text-brand-muted">6月</span>
+                                        <input type="number" id="m-6" oninput="calculateTotalIncome()" class="w-full text-center text-xs font-bold text-brand-dark border-b border-dotted border-brand-muted bg-transparent outline-none focus:border-brand-accent" placeholder="0">
+                                    </div>
+                                    <div class="bg-white rounded-lg p-1 border border-brand-sand flex flex-col items-center">
+                                        <span class="text-[9px] font-bold text-brand-muted">7月</span>
+                                        <input type="number" id="m-7" oninput="calculateTotalIncome()" class="w-full text-center text-xs font-bold text-brand-dark border-b border-dotted border-brand-muted bg-transparent outline-none focus:border-brand-accent" placeholder="0">
+                                    </div>
+                                    <div class="bg-white rounded-lg p-1 border border-brand-sand flex flex-col items-center">
+                                        <span class="text-[9px] font-bold text-brand-muted">8月</span>
+                                        <input type="number" id="m-8" oninput="calculateTotalIncome()" class="w-full text-center text-xs font-bold text-brand-dark border-b border-dotted border-brand-muted bg-transparent outline-none focus:border-brand-accent" placeholder="0">
+                                    </div>
+                                    <div class="bg-white rounded-lg p-1 border border-brand-sand flex flex-col items-center">
+                                        <span class="text-[9px] font-bold text-brand-muted">9月</span>
+                                        <input type="number" id="m-9" oninput="calculateTotalIncome()" class="w-full text-center text-xs font-bold text-brand-dark border-b border-dotted border-brand-muted bg-transparent outline-none focus:border-brand-accent" placeholder="0">
+                                    </div>
+                                    <div class="bg-white rounded-lg p-1 border border-brand-sand flex flex-col items-center">
+                                        <span class="text-[9px] font-bold text-brand-muted">10月</span>
+                                        <input type="number" id="m-10" oninput="calculateTotalIncome()" class="w-full text-center text-xs font-bold text-brand-dark border-b border-dotted border-brand-muted bg-transparent outline-none focus:border-brand-accent" placeholder="0">
+                                    </div>
+                                    <div class="bg-white rounded-lg p-1 border border-brand-sand flex flex-col items-center">
+                                        <span class="text-[9px] font-bold text-brand-muted">11月</span>
+                                        <input type="number" id="m-11" oninput="calculateTotalIncome()" class="w-full text-center text-xs font-bold text-brand-dark border-b border-dotted border-brand-muted bg-transparent outline-none focus:border-brand-accent" placeholder="0">
+                                    </div>
+                                    <div class="bg-white rounded-lg p-1 border border-brand-sand flex flex-col items-center">
+                                        <span class="text-[9px] font-bold text-brand-muted">12月</span>
+                                        <input type="number" id="m-12" oninput="calculateTotalIncome()" class="w-full text-center text-xs font-bold text-brand-dark border-b border-dotted border-brand-muted bg-transparent outline-none focus:border-brand-accent" placeholder="0">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 計算サマリー -->
+                            <div class="flex flex-col gap-2">
+                                <div class="bg-white rounded-xl p-2.5 shadow-sm border border-brand-sand flex flex-col gap-1">
+                                    <div class="flex justify-between items-center text-xs text-brand-muted">
+                                        <span>📝 今年の副業合計所得:</span>
+                                        <span class="font-bold text-brand-dark"><span id="sum-income" class="text-sm">0</span> 円</span>
+                                    </div>
+                                    <div class="flex justify-between items-center text-xs font-bold pt-1.5 border-t border-brand-bg">
+                                        <span class="text-brand-accent">💡 確定申告（20万）まであと:</span>
+                                        <span class="text-brand-accent"><span id="remaining-income" class="text-sm">200,000</span> 円</span>
+                                    </div>
+                                </div>
+                                <div class="flex gap-2">
+                                    <button onclick="clearIncomeMemo()" class="flex-1 py-1.5 text-xs font-bold text-brand-muted bg-white border border-brand-sand hover:bg-brand-sand/20 rounded-lg transition-all"><i class="fa-solid fa-trash-can mr-1"></i>クリア</button>
+                                    <button onclick="saveIncomeMemo()" class="flex-[2] py-1.5 text-xs font-bold text-white bg-brand-accent hover:bg-brand-accent/90 rounded-lg shadow transition-all"><i class="fa-solid fa-cloud-arrow-up mr-1"></i>ブラウザに一時保存</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- フッター -->
+                    <div class="flex justify-between items-center border-t border-brand-sand pt-3 mt-4 text-xs text-brand-muted">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-circle-info text-brand-terracotta"></i>
+                            <span>スマホでスクリーンショットを撮って保存するか、印刷して手帳などに貼ってご活用ください。</span>
+                        </div>
+                        <div class="kiwi-maru font-medium text-brand-dark text-xs">有料記事「完全防衛マップ」購入者限定付録</div>
+                    </div>
+                </div>
+
+                <!-- ==================== スライド3：「普通徴収申告」判断フローチャート ==================== -->
+                <div id="slide-content-3" class="h-full flex flex-col justify-between relative z-10 transition-opacity duration-300 hidden">
+                    <!-- ヘッダー -->
+                    <div class="flex justify-between items-end border-b-2 border-brand-sand pb-3 mb-4">
+                        <div class="flex flex-col gap-1">
+                            <span class="bg-brand-terracotta text-white text-xs font-bold px-3 py-0.5 rounded-full w-fit tracking-wider">有料記事購入者限定特典</span>
+                            <h2 class="kiwi-maru text-3xl font-medium text-brand-dark">「普通徴収申告」判断フローチャート</h2>
+                            <p class="text-xs text-brand-muted">〜住民税から副業が会社・夫に漏れるリスクを、YES/NOで完全シャットアウト〜</p>
+                        </div>
+                        <div class="text-right text-xs text-brand-muted leading-relaxed">
+                            対象：<strong>パート主婦・ひっそり副業層向け</strong><br>
+                            ※住民税の「普通徴収」は、副業バレを防ぐ必須防衛策です。
+                        </div>
+                    </div>
+
+                    <!-- コンテンツエリア -->
+                    <div class="flex-grow flex gap-6 overflow-hidden">
+                        
+                        <!-- 左カラム：判定ボード -->
+                        <div class="flex-[1.2] flex flex-col justify-center gap-3 relative">
+                            
+                            <!-- Q1 -->
+                            <div class="bg-white border-2 border-brand-sand rounded-2xl p-3 shadow-sm transition-all duration-300" id="q1-node">
+                                <div class="text-[10px] font-bold text-brand-muted tracking-widest flex items-center gap-1.5 mb-1">
+                                    <i class="fa-solid fa-calculator text-brand-terracotta"></i> STEP 1：所得金額の判定
+                                </div>
+                                <h4 class="text-brand-dark font-bold text-sm mb-2">副業の年間「所得」（売上から経費を引いた利益）が【20万円】を超えている？</h4>
+                                <div class="flex gap-2">
+                                    <button id="btn-q1-yes" onclick="answerQ1(true)" class="flex-1 py-1.5 rounded-xl text-xs font-bold border border-brand-sand bg-brand-slide text-brand-dark hover:bg-brand-sand/20 transition-all">はい（20万円超）</button>
+                                    <button id="btn-q1-no" onclick="answerQ1(false)" class="flex-1 py-1.5 rounded-xl text-xs font-bold border border-brand-sand bg-brand-slide text-brand-dark hover:bg-brand-sand/20 transition-all">いいえ（20万円以下）</button>
+                                </div>
+                            </div>
+
+                            <!-- コネクター1 -->
+                            <div class="w-0.5 h-4 bg-brand-sand self-center transition-all duration-300" id="connect-line-1"></div>
+
+                            <!-- Q2 -->
+                            <div class="bg-white border border-brand-sand rounded-2xl p-3 opacity-50 pointer-events-none transition-all duration-300" id="q2-node">
+                                <div class="text-[10px] font-bold text-brand-muted tracking-widest flex items-center gap-1.5 mb-1">
+                                    <i class="fa-solid fa-coins text-brand-terracotta"></i> STEP 2：微小利益の確認
+                                </div>
+                                <h4 class="text-brand-dark font-bold text-sm mb-2">副業による1年間の利益（1円でも手元に残った額）はある？</h4>
+                                <div class="flex gap-2">
+                                    <button id="btn-q2-yes" onclick="answerQ2(true)" class="flex-1 py-1.5 rounded-xl text-xs font-bold border border-brand-sand bg-brand-slide text-brand-dark transition-all">はい（1円〜20万円）</button>
+                                    <button id="btn-q2-no" onclick="answerQ2(false)" class="flex-1 py-1.5 rounded-xl text-xs font-bold border border-brand-sand bg-brand-slide text-brand-dark transition-all">いいえ（完全に0円または赤字）</button>
+                                </div>
+                            </div>
+
+                            <!-- コネクター2 -->
+                            <div class="w-0.5 h-4 bg-brand-sand self-center transition-all duration-300" id="connect-line-2"></div>
+
+                            <!-- 結果ルート一覧 -->
+                            <div class="grid grid-cols-3 gap-2">
+                                <!-- ルートA -->
+                                <div id="card-res-a" onclick="focusResult('A')" class="relative bg-white border-2 border-brand-sand rounded-xl p-2 text-center cursor-pointer transition-all duration-300 hover:scale-[1.03] opacity-60">
+                                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-brand-accent text-white font-bold text-[9px] px-2 py-0.5 rounded-full whitespace-nowrap hidden animate-bounce-slow" id="arrow-res-a">👉 あなたはココ！</div>
+                                    <span class="inline-block text-[9px] font-bold text-red-700 bg-red-100 px-1.5 py-0.5 rounded mb-1">所得税申告</span>
+                                    <h5 class="text-[11px] font-bold text-brand-dark">【確定申告】<br>＋普通徴収設定</h5>
+                                </div>
+                                <!-- ルートB -->
+                                <div id="card-res-b" onclick="focusResult('B')" class="relative bg-white border-2 border-brand-sand rounded-xl p-2 text-center cursor-pointer transition-all duration-300 hover:scale-[1.03] opacity-60">
+                                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-brand-accent text-white font-bold text-[9px] px-2 py-0.5 rounded-full whitespace-nowrap hidden animate-bounce-slow" id="arrow-res-b">👉 あなたはココ！</div>
+                                    <span class="inline-block text-[9px] font-bold text-amber-700 bg-amber-100 px-1.5 py-0.5 rounded mb-1">住民税のみ申告</span>
+                                    <h5 class="text-[11px] font-bold text-brand-dark">【住民税申告】<br>＋普通徴収選択</h5>
+                                </div>
+                                <!-- ルートC -->
+                                <div id="card-res-c" onclick="focusResult('C')" class="relative bg-white border-2 border-brand-sand rounded-xl p-2 text-center cursor-pointer transition-all duration-300 hover:scale-[1.03] opacity-60">
+                                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-brand-accent text-white font-bold text-[9px] px-2 py-0.5 rounded-full whitespace-nowrap hidden animate-bounce-slow" id="arrow-res-c">👉 あなたはココ！</div>
+                                    <span class="inline-block text-[9px] font-bold text-emerald-700 bg-emerald-100 px-1.5 py-0.5 rounded mb-1">申告不要</span>
+                                    <h5 class="text-[11px] font-bold text-brand-dark">【税金手続き不要】<br>完全安全圏</h5>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 右カラム：診断アクションボード -->
+                        <div class="flex-grow bg-white border border-brand-sand rounded-2xl p-4 flex flex-col justify-between relative shadow-sm">
+                            <!-- 未選択時のウェルカムパネル -->
+                            <div id="flow-welcome-panel" class="h-full flex flex-col justify-center items-center text-center gap-3">
+                                <i class="fa-solid fa-comments-dollar text-4xl text-brand-sand animate-pulse"></i>
+                                <h3 class="kiwi-maru text-brand-dark font-medium text-base">あなたのアクションプランを自動診断</h3>
+                                <p class="text-xs text-brand-muted max-w-[320px] leading-relaxed">
+                                    左側のフローチャートでYES/NOを選択するか、直接ルートカードをクリックしてみてください。<br>
+                                    「絶対に会社・家族にバレない実行スケジュール」がここに現れます。
+                                </p>
+                            </div>
+
+                            <!-- 診断結果表示パネル（JSで出し分け） -->
+                            <div id="flow-result-panel" class="h-full flex flex-col justify-between hidden">
+                                <div class="flex justify-between items-start border-b border-dotted border-brand-sand pb-2 mb-2">
+                                    <div>
+                                        <span id="res-panel-tag" class="text-[10px] font-bold text-brand-accent tracking-wider">診断結果：ルートA</span>
+                                        <h3 id="res-panel-title" class="kiwi-maru text-base font-bold text-brand-dark">確定申告＋普通徴収設定プラン</h3>
+                                    </div>
+                                    <button onclick="resetFlowchart()" class="text-[10px] text-brand-muted hover:text-brand-dark bg-brand-slide border border-brand-sand px-2 py-1 rounded transition-all flex items-center gap-1"><i class="fa-solid fa-arrow-rotate-left"></i>最初から</button>
+                                </div>
+
+                                <div class="flex-grow overflow-y-auto pr-1 scroll-custom space-y-3">
+                                    <!-- 申告時期 -->
+                                    <div>
+                                        <span class="text-xs font-bold text-brand-dark flex items-center gap-1"><i class="fa-solid fa-calendar-days text-brand-terracotta"></i> ⏰ 申告する時期</span>
+                                        <p id="res-panel-timing" class="text-xs font-bold text-brand-accent pl-5 mt-0.5">翌年2月16日〜3月15日の間</p>
+                                    </div>
+
+                                    <!-- 実行やることリスト -->
+                                    <div>
+                                        <span class="text-xs font-bold text-brand-dark flex items-center gap-1"><i class="fa-solid fa-list-check text-brand-terracotta"></i> 📝 実行やることリスト</span>
+                                        <ul id="res-panel-checklist" class="space-y-1.5 pl-5 mt-1 text-xs text-brand-dark leading-relaxed">
+                                            <!-- JSで動的生成 -->
+                                        </ul>
+                                    </div>
+
+                                    <!-- 魔法のセリフ -->
+                                    <div>
+                                        <span class="text-xs font-bold text-brand-dark flex items-center gap-1"><i class="fa-solid fa-phone-volume text-brand-terracotta"></i> 💬 役所の税務課に聞く「魔法のセリフ」</span>
+                                        <div class="bg-brand-slide border border-dashed border-brand-terracotta rounded-xl p-3 mt-1 relative">
+                                            <span class="absolute top-1 left-2 text-3xl text-brand-sand leading-none font-serif">“</span>
+                                            <p id="res-panel-script" class="text-xs text-brand-dark italic pl-5 leading-relaxed">「パートにバレたくないので、副業の雑所得だけ自分で納付したいのですが、申請書はどこにチェックをすれば良いですか？」</p>
+                                        </div>
+                                    </div>
+
+                                    <!-- お守り防衛策 -->
+                                    <div class="bg-brand-bg/50 border-l-4 border-brand-terracotta rounded-r-lg p-2.5 text-xs text-brand-dark leading-relaxed">
+                                        <span class="font-bold text-brand-dark flex items-center gap-1 mb-1"><i class="fa-solid fa-shield-halved text-brand-terracotta"></i> 🛡️ 完全防衛お守り対策</span>
+                                        <p id="res-panel-defense">本業と副業をわけずに申告すると、副業分の住民税額が本業のパート先に通知されてバレます。必ず普通徴収を徹底してください。</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- フッター -->
+                    <div class="flex justify-between items-center border-t border-brand-sand pt-3 mt-4 text-xs text-brand-muted">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-lightbulb text-brand-terracotta"></i>
+                            <span>15秒のYES/NO診断で、あなたに必要な税務アクションを完璧に洗い出せます。</span>
+                        </div>
+                        <div class="kiwi-maru font-medium text-brand-dark text-xs">有料記事「完全防衛マップ」購入者限定付録</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- フッター（アプリ全体） -->
+    <footer class="w-full max-w-[1280px] bg-brand-slide rounded-2xl shadow-md p-3 text-center text-xs text-brand-muted flex flex-col sm:flex-row justify-between items-center gap-2">
+        <div class="flex items-center gap-1">
+            <i class="fa-regular fa-bookmark text-brand-terracotta"></i>
+            <span>このページはそのままスマホでブックマーク保存・手帳に書き写して何度でもご利用可能です。</span>
+        </div>
+        <div class="font-bold text-brand-dark">© 2026 副業完全防衛お守りマップ. All Rights Reserved.</div>
+    </footer>
+
+    <!-- インタラクティブロジック用のJS -->
+    <script>
+        // --- 画面スケーリングエンジン（1280x720の比率を美しく保ちながらレスポンシブにフィット） ---
+        function adjustSlideScale() {
+            const viewport = document.getElementById('slide-container');
+            const parent = viewport.parentElement;
+            
+            // 画面の幅と高さから最適な比率を計算
+            const containerWidth = parent.clientWidth;
+            const containerHeight = parent.clientHeight;
+            
+            const scaleX = containerWidth / 1280;
+            const scaleY = containerHeight / 720;
+            
+            // アスペクト比を維持して、親要素からはみ出ない限界まで拡大縮小
+            const scale = Math.min(scaleX, scaleY, 1.2); // 最大1.2倍まで拡大を許容
+            
+            viewport.style.transform = `scale(${scale})`;
+        }
+
+        window.addEventListener('resize', adjustSlideScale);
+        window.addEventListener('DOMContentLoaded', () => {
+            adjustSlideScale();
+            loadProgress();
+            loadIncomeMemo();
+        });
+
+        // --- スライド切り替え ---
+        let currentSlide = 1;
+        function switchSlide(slideNum) {
+            currentSlide = slideNum;
+            
+            // すべてのコンテンツを非表示に
+            document.getElementById('slide-content-1').classList.add('hidden');
+            document.getElementById('slide-content-2').classList.add('hidden');
+            document.getElementById('slide-content-3').classList.add('hidden');
+            
+            // 選択されたコンテンツを表示
+            document.getElementById(`slide-content-${slideNum}`).classList.remove('hidden');
+            
+            // タブのスタイリング切り替え
+            for(let i = 1; i <= 3; i++) {
+                const tab = document.getElementById(`tab-${i}`);
+                if(i === slideNum) {
+                    tab.className = "px-4 py-2 text-xs md:text-sm font-bold rounded-lg transition-all flex items-center gap-2 text-brand-accent bg-brand-slide shadow-sm";
+                } else {
+                    tab.className = "px-4 py-2 text-xs md:text-sm font-bold rounded-lg transition-all flex items-center gap-2 text-brand-muted hover:text-brand-dark";
+                }
+            }
+            
+            // 切り替え時にスケーリングを再計算
+            setTimeout(adjustSlideScale, 50);
+        }
+
+        // --- スライド1：ステップ実行チェックシート進捗ロジック ---
+        let stepStates = {
+            1: false,
+            2: false,
+            3: false,
+            4: false,
+            5: false
+        };
+
+        function toggleStepCheck(stepNum) {
+            stepStates[stepNum] = !stepStates[stepNum];
+            updateStepCheckboxUI(stepNum);
+            calculateStepProgress();
+            saveProgress();
+        }
+
+        function updateStepCheckboxUI(stepNum) {
+            const checkContainer = document.getElementById(`checkbox-${stepNum}`);
+            if (stepStates[stepNum]) {
+                checkContainer.innerHTML = `<i class="fa-solid fa-square-check text-lg text-brand-accent"></i>`;
+                checkContainer.parentElement.parentElement.classList.add('bg-brand-sand/10', 'opacity-80');
+            } else {
+                checkContainer.innerHTML = `<i class="fa-regular fa-square text-lg text-brand-muted group-hover:text-brand-accent"></i>`;
+                checkContainer.parentElement.parentElement.classList.remove('bg-brand-sand/10', 'opacity-80');
+            }
+        }
+
+        function calculateStepProgress() {
+            let checkedCount = 0;
+            for (let key in stepStates) {
+                if (stepStates[key]) checkedCount++;
+            }
+            const percentage = Math.round((checkedCount / 5) * 100);
+            
+            document.getElementById('check-progress-bar').style.width = `${percentage}%`;
+            document.getElementById('check-progress-text').innerText = `${checkedCount} / 5 完了 (${percentage}%)`;
+        }
+
+        function saveProgress() {
+            localStorage.setItem('defense_step_progress', JSON.stringify(stepStates));
+        }
+
+        function loadProgress() {
+            const saved = localStorage.getItem('defense_step_progress');
+            if (saved) {
+                try {
+                    stepStates = JSON.parse(saved);
+                    for (let key in stepStates) {
+                        updateStepCheckboxUI(key);
+                    }
+                    calculateStepProgress();
+                } catch(e) {
+                    console.error("Failed to load progress state", e);
+                }
+            }
+        }
+
+
+        // --- スライド2：所得管理メモのインタラクティブ計算ロジック ---
+        function calculateTotalIncome() {
+            let total = 0;
+            for(let i = 1; i <= 12; i++) {
+                const val = parseFloat(document.getElementById(`m-${i}`).value) || 0;
+                total += val;
+            }
+            
+            const remaining = 200000 - total;
+            
+            // 表示の更新
+            document.getElementById('sum-income').innerText = total.toLocaleString();
+            
+            const remainingSpan = document.getElementById('remaining-income');
+            remainingSpan.innerText = remaining.toLocaleString();
+            
+            // 安全限界を越した場合のアラート表現
+            if (remaining <= 0) {
+                remainingSpan.className = "text-sm text-rose-600 bg-rose-50 px-2 py-0.5 rounded border border-rose-200 animate-pulse font-bold";
+                document.getElementById('remaining-income').parentElement.parentElement.classList.add('bg-rose-50/50');
+            } else {
+                remainingSpan.className = "text-sm text-brand-accent font-bold";
+                document.getElementById('remaining-income').parentElement.parentElement.classList.remove('bg-rose-50/50');
+            }
+        }
+
+        function saveIncomeMemo() {
+            const memoData = {};
+            for(let i = 1; i <= 12; i++) {
+                memoData[i] = document.getElementById(`m-${i}`).value;
+            }
+            localStorage.setItem('defense_income_memo', JSON.stringify(memoData));
+            showToast("所得管理メモを一時保存しました！");
+        }
+
+        function loadIncomeMemo() {
+            const saved = localStorage.getItem('defense_income_memo');
+            if (saved) {
+                try {
+                    const memoData = JSON.parse(saved);
+                    for(let i = 1; i <= 12; i++) {
+                        if (memoData[i] !== undefined) {
+                            document.getElementById(`m-${i}`).value = memoData[i];
+                        }
+                    }
+                    calculateTotalIncome();
+                } catch(e) {
+                    console.error("Failed to load income memo", e);
+                }
+            }
+        }
+
+        function clearIncomeMemo() {
+            if(confirm("今年度の所得管理メモを全てクリアしますか？")) {
+                for(let i = 1; i <= 12; i++) {
+                    document.getElementById(`m-${i}`).value = '';
+                }
+                calculateTotalIncome();
+                localStorage.removeItem('defense_income_memo');
+            }
+        }
+
+        // 簡易トースト通知
+        function showToast(message) {
+            const toast = document.createElement('div');
+            toast.className = "fixed bottom-8 left-1/2 -translate-x-1/2 bg-brand-dark text-white text-xs font-bold px-6 py-3 rounded-full shadow-lg z-50 transition-all duration-300 transform opacity-0 translate-y-2";
+            toast.innerText = message;
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.classList.remove('opacity-0', 'translate-y-2');
+            }, 100);
+            
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-2');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+
+        // --- スライド3：「普通徴収申告」フローチャート判定ロジック ---
+        let q1Selection = null;
+        let q2Selection = null;
+
+        const flowchartData = {
+            'A': {
+                tag: '診断結果：ルートA［年間所得20万円超］',
+                title: '「所得税の確定申告」＋「普通徴収設定」',
+                timing: '【翌年の2月16日 〜 3月15日】の間',
+                checklist: [
+                    '1年間の副業売上と必要経費（スマホ代・資材費など）を集計し「所得（利益）」を算出する',
+                    '国税庁の「確定申告書等作成コーナー」からオンライン（e-Taxなど）で申告を行う',
+                    '申告書第二表の<strong>【給与・公的年金等以外の所得に係る住民税の徴収方法】欄で、必ず「自分で納付（普通徴収）」にチェック</strong>を入れる'
+                ],
+                script: '「確定申告にて副業分の住民税を『自分で納付（普通徴収）』に指定したのですが、本業のパート分の住民税（特別徴収）と混ざらず、正しく自宅宛てに納付書が届くように処理されていますでしょうか？」',
+                defense: '翌年の5月頃に、お住まいの市区町村の役場（市民税・住民税課）へ一度電話を入れ、上記の「魔法のセリフ」を使って二重チェックしておくと、役所側のヒューマンエラーによる会社バレを100%防げます。'
+            },
+            'B': {
+                tag: '診断結果：ルートB［年間所得1円以上〜20万円以下］',
+                title: '「住民税のみの申告」＋「普通徴収選択」',
+                timing: '【翌年の2月16日 〜 3月15日】の間',
+                checklist: [
+                    '国税の「確定申告」は不要ですが、<strong>地方自治体への「住民税の申告」は1円以上の副業所得があれば必須</strong>となります',
+                    'お住まいの市区町村役場の税務課窓口に行くか、役所のHPから住民税申告書をダウンロードして郵送する',
+                    '住民税申告書の中にある住民税の納付方法にて、<strong>必ず「普通徴収（自分で納付）」を選択</strong>する'
+                ],
+                script: '「パート（給与）とは別に副業の雑所得（20万円以下）があるので住民税の申告に来ました。会社へ余計な通知が行かないように、今回の副業分のみ『普通徴収（自分で納付）』にしたいです。どこに書けば良いでしょうか？」',
+                defense: '「20万円以下は申告不要」は所得税だけの特例です。住民税は1円でも得ると申告義務があり、これを怠ると、後日パート先にまとめて通知されてしまいバレる最大の引き金となります。必ず住民税のみの申告をしてください。'
+            },
+            'C': {
+                tag: '診断結果：ルートC［年間所得0円または赤字］',
+                title: '「税金申告は一切不要（完全安全圏）」',
+                timing: '申告手続きは一切不要です',
+                checklist: [
+                    '所得税・住民税どちらの申告も法律上、一切必要ありません。完全に自由な活動として安全に取り組んでください',
+                    '万が一に備え、副業関連の領収書や売上記録は「自分だけの秘密のファイル」等にまとめて自宅に保管しておく（7年間推奨）',
+                    '副業にかかった経費のせいで年間収支が「赤字」の場合も、パートの給与所得と損益通算する必要がない（雑所得の場合）ため手続きは不要です'
+                ],
+                script: '（役所への連絡・手続き自体が不要なため、特に電話をかけたり、セリフを言う必要はありません。ご安心ください）',
+                defense: '利益（売上ー経費）が1円でも出た段階で【ルートB】に移ります。手元にお金が入ったら、忘れずにスマホのメモ等へ日付と金額、使った経費（資材、通信費など）を記録しておきましょう。'
+            }
+        };
+
+        function answerQ1(yes) {
+            q1Selection = yes;
+            
+            // ボタンのスタイル切り替え
+            const yesBtn = document.getElementById('btn-q1-yes');
+            const noBtn = document.getElementById('btn-q1-no');
+            
+            if (yes) {
+                yesBtn.className = "flex-1 py-1.5 rounded-xl text-xs font-bold border-2 border-brand-accent bg-rose-50 text-brand-accent transition-all";
+                noBtn.className = "flex-1 py-1.5 rounded-xl text-xs font-bold border border-brand-sand bg-brand-slide text-brand-muted transition-all";
+                
+                // Q2を不活性化
+                document.getElementById('q2-node').className = "bg-white border border-brand-sand rounded-2xl p-3 opacity-30 pointer-events-none transition-all duration-300";
+                document.getElementById('connect-line-2').className = "w-0.5 h-4 bg-brand-sand self-center transition-all duration-300";
+                
+                // コネクター1のハイライト
+                document.getElementById('connect-line-1').className = "w-0.5 h-4 bg-brand-accent self-center transition-all duration-300";
+                
+                // 直接ルートAをアクティブ化
+                focusResult('A');
+            } else {
+                yesBtn.className = "flex-1 py-1.5 rounded-xl text-xs font-bold border border-brand-sand bg-brand-slide text-brand-muted transition-all";
+                noBtn.className = "flex-1 py-1.5 rounded-xl text-xs font-bold border-2 border-brand-accent bg-rose-50 text-brand-accent transition-all";
+                
+                // Q2を活性化
+                document.getElementById('q2-node').className = "bg-white border-2 border-brand-accent rounded-2xl p-3 shadow-md transition-all duration-300";
+                document.getElementById('connect-line-1').className = "w-0.5 h-4 bg-brand-accent self-center transition-all duration-300";
+                
+                // Q2のボタンをインタラクティブ可能に
+                document.getElementById('btn-q2-yes').className = "flex-1 py-1.5 rounded-xl text-xs font-bold border border-brand-sand bg-brand-slide text-brand-dark hover:bg-brand-sand/20 transition-all";
+                document.getElementById('btn-q2-no').className = "flex-1 py-1.5 rounded-xl text-xs font-bold border border-brand-sand bg-brand-slide text-brand-dark hover:bg-brand-sand/20 transition-all";
+                
+                // 結果リセット
+                resetResultsHighlight();
+                document.getElementById('flow-welcome-panel').classList.remove('hidden');
+                document.getElementById('flow-result-panel').classList.add('hidden');
+            }
+        }
+
+        function answerQ2(yes) {
+            if (q1Selection === null || q1Selection === true) return;
+            q2Selection = yes;
+
+            const yesBtn = document.getElementById('btn-q2-yes');
+            const noBtn = document.getElementById('btn-q2-no');
+
+            if (yes) {
+                yesBtn.className = "flex-1 py-1.5 rounded-xl text-xs font-bold border-2 border-brand-accent bg-rose-50 text-brand-accent transition-all";
+                noBtn.className = "flex-1 py-1.5 rounded-xl text-xs font-bold border border-brand-sand bg-brand-slide text-brand-muted transition-all";
+                focusResult('B');
+            } else {
+                yesBtn.className = "flex-1 py-1.5 rounded-xl text-xs font-bold border border-brand-sand bg-brand-slide text-brand-muted transition-all";
+                noBtn.className = "flex-1 py-1.5 rounded-xl text-xs font-bold border-2 border-brand-accent bg-rose-50 text-brand-accent transition-all";
+                focusResult('C');
+            }
+            
+            // コネクター2のハイライト
+            document.getElementById('connect-line-2').className = "w-0.5 h-4 bg-brand-accent self-center transition-all duration-300";
+        }
+
+        function resetResultsHighlight() {
+            ['a', 'b', 'c'].forEach(type => {
+                document.getElementById(`card-res-${type}`).className = "relative bg-white border border-brand-sand rounded-xl p-2 text-center cursor-pointer transition-all duration-300 hover:scale-[1.03] opacity-60";
+                document.getElementById(`arrow-res-${type}`).classList.add('hidden');
+            });
+        }
+
+        function focusResult(type) {
+            resetResultsHighlight();
+            
+            // 対象結果のハイライト
+            const targetCard = document.getElementById(`card-res-${type.toLowerCase()}`);
+            targetCard.className = "relative bg-white border-2 border-brand-accent rounded-xl p-2 text-center cursor-pointer transition-all duration-300 scale-[1.05] shadow-md z-10 opacity-100";
+            document.getElementById(`arrow-res-${type.toLowerCase()}`).classList.remove('hidden');
+
+            // 右側プラン表示パネルの活性化
+            document.getElementById('flow-welcome-panel').classList.add('hidden');
+            document.getElementById('flow-result-panel').classList.remove('hidden');
+
+            // データ反映
+            const data = flowchartData[type];
+            document.getElementById('res-panel-tag').innerText = data.tag;
+            document.getElementById('res-panel-title').innerText = data.title;
+            document.getElementById('res-panel-timing').innerText = data.timing;
+            document.getElementById('res-panel-script').innerText = data.script;
+            document.getElementById('res-panel-defense').innerHTML = data.defense;
+
+            // チェックリスト生成
+            const listContainer = document.getElementById('res-panel-checklist');
+            listContainer.innerHTML = '';
+            data.checklist.forEach(item => {
+                const li = document.createElement('li');
+                li.className = "relative pl-4";
+                li.innerHTML = `<span class="absolute left-0 text-brand-accent">•</span> ${item}`;
+                listContainer.appendChild(li);
+            });
+        }
+
+        function resetFlowchart() {
+            q1Selection = null;
+            q2Selection = null;
+
+            // Q1ボタンリセット
+            document.getElementById('btn-q1-yes').className = "flex-1 py-1.5 rounded-xl text-xs font-bold border border-brand-sand bg-brand-slide text-brand-dark hover:bg-brand-sand/20 transition-all";
+            document.getElementById('btn-q1-no').className = "flex-1 py-1.5 rounded-xl text-xs font-bold border border-brand-sand bg-brand-slide text-brand-dark hover:bg-brand-sand/20 transition-all";
+            document.getElementById('q1-node').className = "bg-white border-2 border-brand-accent rounded-2xl p-3 shadow-md transition-all duration-300";
+
+            // Q2リセットと不活性化
+            document.getElementById('q2-node').className = "bg-white border border-brand-sand rounded-2xl p-3 opacity-50 pointer-events-none transition-all duration-300";
+            document.getElementById('btn-q2-yes').className = "flex-1 py-1.5 rounded-xl text-xs font-bold border border-brand-sand bg-brand-slide text-brand-dark transition-all";
+            document.getElementById('btn-q2-no').className = "flex-1 py-1.5 rounded-xl text-xs font-bold border border-brand-sand bg-brand-slide text-brand-dark transition-all";
+
+            // コネクターリセット
+            document.getElementById('connect-line-1').className = "w-0.5 h-4 bg-brand-sand self-center transition-all duration-300";
+            document.getElementById('connect-line-2').className = "w-0.5 h-4 bg-brand-sand self-center transition-all duration-300";
+
+            // 結果ハイライトリセット
+            resetResultsHighlight();
+
+            // 右パネルリセット
+            document.getElementById('flow-welcome-panel').classList.remove('hidden');
+            document.getElementById('flow-result-panel').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
